@@ -1,0 +1,8 @@
+<div class='container'>
+       <% if logged_in? %>
+          <h4>Now, You are log in as <%= link_to current_user.name , user_path(current_user) %></h4>
+          <h4><%= link_to "Log out" , logout_path , method: :delete %></h4>
+        <% else %>
+          <h4>Please log in.<h4>
+        <% end %>
+  </div>

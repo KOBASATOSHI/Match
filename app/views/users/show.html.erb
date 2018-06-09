@@ -1,0 +1,7 @@
+<% if current_user?(@user) %>
+    <h2>Hello <%= @user.name %>. How Are You?</h2>
+    <h4>This is your "My Page".</h4>
+    <h2><%= link_to "Search", users_path %></h2>
+<% else %>
+    <h4>This is <%= @user.name %>'s Profile.</h4>
+<% end %>
