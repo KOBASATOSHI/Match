@@ -9,8 +9,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     
     if @user.save
+      log_in @user
       flash[:info] = "Succeeded to Create your account!"
-      redirect_to user_path(@user)
+      redirect_to user_path(current_user)
     else
       render 'new'
     end
