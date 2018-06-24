@@ -6,5 +6,13 @@ Rails.application.routes.draw do
   post '/login' , to: 'sessions#create'
   delete '/logout' , to: 'sessions#destroy'
 
-  resources :users
+  resources :users 
+  resources :favorites do
+    collection do
+      get :favoring, :favored, :matched
+    end
+    member do
+      get :match, :not_match
+    end
+  end
 end

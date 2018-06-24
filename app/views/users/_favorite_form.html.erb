@@ -1,0 +1,15 @@
+<%  if !current_user.favorite?(@user) %>
+
+  <%= form_for(current_user.favorites.new) do |f| %>
+    <div><%= hidden_field_tag :favored_id, @user.id %></div>
+    <%= f.submit "Favorite!", class: "btn btn-primary" %>
+  <% end %>
+<% else %>
+  <% if !@favorite.nil? %>
+      <h3><%= @favorite.status %></h3>
+      <% if @favorite.status == "matching" %>
+        <%= link_to "Me, Too.Thank you!!", match_favorite_path(@favorite), class: 'btn btn-primary' %>
+        <%= link_to "Sorry.No thank you!!", not_match_favorite_path(@favorite), class: 'btn btn-default' %>
+      <% end %>
+  <% end %>
+<% end %>

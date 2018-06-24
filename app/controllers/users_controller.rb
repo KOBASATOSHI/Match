@@ -19,10 +19,15 @@ class UsersController < ApplicationController
   
   def show
      @user = User.find(params[:id])
+     @favorite = Favorite.find_by(favored_id: current_user.id, favor_id: @user.id)
   end
   
   def index
     @users = User.all
+  end
+  
+  def favorite(user)
+    current_user.favorites.create(fovored_id: user.id)
   end
   
   private

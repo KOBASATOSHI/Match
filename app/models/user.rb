@@ -6,6 +6,13 @@ class User < ApplicationRecord
              uniqueness:{case_sensitive:false}
     has_secure_password
     validates :password , presence: true ,length:{ minimum: 6 } ,allow_nil: true
+    has_many :favorites, class_name:  "Favorite",
+                                  foreign_key: "favor_id",
+                                  dependent:   :destroy
+    has_many :passive_favorites, class_name:  "Favorite",
+                                  foreign_key: "favored_id"
+    has_many :favoring, through: :favorites, source: :favored
+    has_many :favored, through: :passive_favorites, source: :favor
 
   # 渡された文字列のハッシュ値を返す
   def User.digest(string)
@@ -25,4 +32,27 @@ class User < ApplicationRecord
     return false if digest.nil?
     BCrypt::Password.new(digest).is_password?(token)
   end
+  
+  def favorite?(other_user)
+    return (self.favoring.include?(other_user) or self.favored.include?(other_user) )
+  end
+  
+  def matched
+    list = Favorite.match.where('favored_id = ? or favor_id = ?', self.id, self.id )
+    user_list = []
+    list.each do |favorite|
+      user_list.push(favorite.other_user(self))
+    end 
+    return user_list 
+  end
+  
+  def favored_matching
+    list = Favorite.matching.where('favored_id = ?', self.id )
+    user_list = []
+    list.each do |favorite|
+      user_list.push(favorite.other_user(self))
+    end 
+    return user_list 
+  end
+  
 end
