@@ -1,0 +1,15 @@
+<h1>new profile</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@group) do |f| %>
+      <%= f.label :user %>
+      <%= f.collection_select :user_id, User.all, :id, :name, {}, {} %>
+      
+      <%= f.label :info %>
+      <%= f.text_field :info, class: 'form-control' %>
+      
+      <%= f.submit "Done", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

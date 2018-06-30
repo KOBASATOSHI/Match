@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'groups/new'
+
+  get 'groups/edit'
+
   root 'sessions#new'
   get '/signup', to: 'users#new'
   post '/signup',  to: 'users#create'
@@ -7,6 +11,7 @@ Rails.application.routes.draw do
   delete '/logout' , to: 'sessions#destroy'
 
   resources :users 
+  resources :groups
   resources :favorites do
     collection do
       get :favoring, :favored, :matched

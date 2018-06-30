@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(version: 20180624013013) do
     t.index ["favored_id"], name: "index_favorites_on_favored_id"
   end
 
+  create_table "groups", force: :cascade do |t|
+    t.string "info"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_groups_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"

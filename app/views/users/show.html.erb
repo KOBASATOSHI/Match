@@ -2,6 +2,7 @@
     <h2>Hello <%= @user.name %>. How Are You?</h2>
     <h4>This is your "My Page".</h4>
     <h2><%= link_to "Search", users_path %></h2>
+    <h2><%= link_to "Group", new_group_path %></h2>
     <h2><%= link_to "Your Favorites(#{@user.favoring.count})", favoring_favorites_path %></h2>
     <h2><%= link_to "Check Favored!(#{@user.favored_matching.count})", favored_favorites_path %></h2>
     <h2><%= link_to "Matched(#{@user.matched.count})", matched_favorites_path %></h2>

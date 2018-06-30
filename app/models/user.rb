@@ -13,6 +13,7 @@ class User < ApplicationRecord
                                   foreign_key: "favored_id"
     has_many :favoring, through: :favorites, source: :favored
     has_many :favored, through: :passive_favorites, source: :favor
+    has_one :group
 
   # 渡された文字列のハッシュ値を返す
   def User.digest(string)
